@@ -13,3 +13,5 @@ ${cp} -a /var/cache/httpsync/public /var/lib/nginx/;
 ${rm} -rf /var/cache/httpsync/public;
 chown nginx:nginx /var/lib/nginx/public;
 chmod 750 /var/lib/nginx/public;
+
+service nginx restart;

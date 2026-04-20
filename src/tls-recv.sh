@@ -11,3 +11,5 @@ ${test} -d /var/cache/httpsync/letsencrypt || exit 0;
 
 ${cp} -a /var/cache/httpsync/letsencrypt /etc;
 ${rm} -rf /var/cache/httpsync/letsencrypt;
+
+service nginx restart;
