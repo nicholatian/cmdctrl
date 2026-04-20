@@ -1,6 +1,6 @@
 #!/bin/sh
 
-test=/bin/test;
+test=test;
 command -v gtest 2>&1 >/dev/null && test=gtest;
 cp=/bin/cp;
 command -v gcp 2>&1 >/dev/null && cp=gcp;
@@ -10,8 +10,6 @@ ln=/bin/ln;
 command -v gln 2>&1 >/dev/null && ln=gln;
 mkdir=/bin/mkdir;
 command -v gmkdir 2>&1 >/dev/null && mkdir=gmkdir;
-install=/usr/bin/install;
-command -v ginstall 2>&1 >/dev/null && install=ginstall;
 find=/usr/bin/find;
 command -v gfind 2>&1 >/dev/null && find=gfind;
 
