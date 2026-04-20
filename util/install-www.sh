@@ -35,7 +35,7 @@ for site in $sites; do
 done
 CDPATH= cd ../enabled || exit 127;
 for site in $sites; do
-	${ln} -sf "../available/$site";
+	${ln} -sf "../available/$site" "$site";
 done
 
 CDPATH= cd "$zero" || exit 127;
