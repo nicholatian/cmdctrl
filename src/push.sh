@@ -17,7 +17,10 @@ test "$1" = '' && {
 for _record in $(cat etc/publish.csv); do
 	IFS=',' read -r src dst <<< "${_record}";
 	${echop} "Uploading $src to $dst... ";
-	rsync -aze 'ssh -q' "$src" \
+	dstdir="$(dirname "$dst")";
+	ssh -q "httpsync@$1" -- \
+		mkdir -p "/var/cache/httpsync/public/$dstdir";
+	rsync -ze 'ssh -q' -lptgoD "$src" \
 		"httpsync@$1:/var/cache/httpsync/public/$dst";
 	${echod};
 done
