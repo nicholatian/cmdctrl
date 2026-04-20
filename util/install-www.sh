@@ -26,16 +26,16 @@ ${cp} -a src/dhparams.pem /etc/nginx/letsencrypt-dhparams.pem;
 ${mkdir} -p /etc/nginx/available;
 ${mkdir} -p /etc/nginx/enabled;
 
-CDPATH= cd "$zero/src/websites";
+CDPATH= cd "$zero/src/websites" || exit 127;
 sites="$(${find} -type f -name '*.conf')";
 
-CDPATH= cd /etc/nginx/available;
+CDPATH= cd /etc/nginx/available || exit 127;
 for site in $sites; do
 	${cp} "$zero/src/websites/$site" ./;
 done
-CDPATH= cd ../enabled;
+CDPATH= cd ../enabled || exit 127;
 for site in $sites; do
 	${ln} -sf "../available/$site";
 done
 
-CDPATH= cd "$zero";
+CDPATH= cd "$zero" || exit 127;
