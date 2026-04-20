@@ -31,11 +31,13 @@ sites="$(${find} -type f -name '*.conf')";
 
 CDPATH= cd /etc/nginx/available || exit 127;
 for site in $sites; do
+	site="${site##*/}";
 	${cp} "$zero/src/websites/$site" ./;
 done
 CDPATH= cd ../enabled || exit 127;
 for site in $sites; do
-	${ln} -sf "../available/$site" "$site";
+	site="${site##*/}";
+	${ln} -sf "../available/$site";
 done
 
 CDPATH= cd "$zero" || exit 127;
