@@ -3,7 +3,7 @@
 echo=/bin/echo; # avoid shell builtins
 command -v gecho 2>&1 >/dev/null && echo=gecho; # for macOS
 command -v stdbuf 2>&1 >/dev/null && echo="stdbuf -o0 ${echo}";
-test=/bin/test;
+test=test;
 command -v gtest 2>&1 >/dev/null && test=gtest;
 
 ${test} "$1" = '' && {
