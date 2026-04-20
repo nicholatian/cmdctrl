@@ -6,10 +6,10 @@ Scripts for orchestrating multi-master web servers.
 
 ## Updating website content
 
-The file `push.sh` is meant to be syndicated into the `util/` subfolders
-of the various website sources, where it can be integrated into a build
-system like Make. `push.sh` takes a two-column CSV file as input for its
-list of sources and their server-side destinations; see
+[`push.sh`](/src/push.sh) is meant to be syndicated into the `util/`
+subfolders of the various website sources, where it can be integrated
+into a build system like Make. `push.sh` takes a two-column CSV file as
+input for its list of sources and their server-side destinations; see
 `etc/publish.csv` for an idea of what that may look like.
 
 In practise, `push.sh` always expects to be run from `util/` in the
