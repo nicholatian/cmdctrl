@@ -17,6 +17,14 @@ source tree with `etc/publish.csv` available as described. It takes a
 single parameter `$1` which is treated as the hostname (or IP address)
 to `rsync` the list of files to.
 
+`push.sh` will use the `httpsync` account and `rsync` to a directory
+that gets periodically scanned by cronjobs on the servers for updates.
+However, it does not specify the `~/.ssh/httpsync` keypair as is done in
+TLS propagation, as it is better in the case of development clients to
+have the default public key `~/.ssh/id_rsa.pub` put into the
+`~/.ssh/authorized_keys` file of `httpsync` on the server designated to
+initiate propagation of website files to the rest.
+
 ## Let&rsquo;s Encrypt synchronisation
 
 Synching _Lets&rsquo;s Encrypt_ configuration data is needed so that all
