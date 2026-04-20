@@ -17,5 +17,12 @@ command -v rsync 2>&1 >/dev/null || {
 	exit 127;
 };
 
+command -v certbot 2>&1 >/dev/null || {
+	${echo} 'certbot is required to run this script. Exiting...';
+	exit 127;
+};
+
+certbot renew;
+
 rsync -aze 'ssh -qi "$HOME/.ssh/httpsync"' /etc/letsencrypt \
 	"httpsync@$1:/var/cache/httpsync/"
