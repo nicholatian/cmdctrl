@@ -18,7 +18,7 @@ command -v rsync 2>&1 >/dev/null || {
 };
 
 for arg in "$@"; do
-	rsync -aze 'ssh -qi "$HOME/.ssh/httpsync"' \
+	rsync -aze 'ssh -qi "/var/cache/httpsync/.ssh/httpsync"' \
 		/var/lib/nginx/public \
 		"httpsync@$arg:/var/cache/httpsync/"
 done
