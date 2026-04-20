@@ -11,7 +11,7 @@ ${test} -d /var/cache/httpsync/public || exit 0;
 
 ${cp} -a /var/cache/httpsync/public /var/lib/nginx/;
 ${rm} -rf /var/cache/httpsync/public;
-chown nginx:nginx /var/lib/nginx/public;
+chown -R nginx:nginx /var/lib/nginx/public;
 chmod 750 /var/lib/nginx/public;
 
 service nginx restart;
