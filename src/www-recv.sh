@@ -1,6 +1,6 @@
 #!/bin/sh
 
-test=/bin/test;
+test=test;
 command -v gtest 2>&1 >/dev/null && test=gtest;
 cp=/bin/cp;
 command -v gcp 2>&1 >/dev/null && cp=gcp;
