@@ -24,5 +24,5 @@ command -v certbot 2>&1 >/dev/null || {
 
 certbot renew;
 
-rsync -aze 'ssh -qi "$HOME/.ssh/httpsync"' /etc/letsencrypt \
+rsync -aze 'ssh -qi "/var/cache/httpsync/.ssh/httpsync"' /etc/letsencrypt \
 	"httpsync@$1:/var/cache/httpsync/"

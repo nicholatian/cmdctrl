@@ -52,7 +52,7 @@ settings (swap out `@HOSTNAME@` with the target hostname or IP address):
 
 ```sh
 host=@HOSTNAME@
-rsync -avze 'ssh -qi "$HOME/.ssh/httpsync"' \
+rsync -avze 'ssh -qi "/var/cache/httpsync/.ssh/httpsync"' \
 	/etc/letsencrypt \
 	"httpsync@$host:/var/cache/httpsync"
 ```
