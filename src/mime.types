@@ -1,0 +1,103 @@
+types
+{
+	text/html htm html shtml ssi;
+	text/css css;
+	text/plain txt nfo log;
+	text/tab-separated-values tsv;
+	text/csv csv;
+	text/x-rst rst;
+	application/pdf pdf;
+	application/postscript eps ps ai;
+	application/xml xml xsl rdf wsdl xpdl;
+	application/atom+xml atom;
+	application/rss+xml rss;
+
+	image/gif gif;
+	image/jpeg jpg jpe jpeg jfif;
+	image/png png;
+	image/svg+xml svg;
+	image/tiff tif tiff;
+	image/avif avif;
+	image/x-icon ico;
+	image/x-canon-cr2 cr2;
+	image/x-canon-cr3 cr3;
+	image/x-nikon-nef nef;
+	image/x-nikon-nrw nrw;
+	image/x-sony-arw arw;
+	image/x-sony-srf srf;
+	image/x-sony-sr2 sr2;
+	image/x-olympus-orf orf;
+	image/x-panasonic-rw2 rw2;
+	image/x-pentax-pef pef;
+	image/x-fuji-raf raf;
+	image/x-adobe-dng dng;
+	image/x-raw raw;
+
+	audio/mpeg mp2 mp3;
+	audio/ogg ogg;
+	audio/opus opus;
+	audio/aac aac ass adts;
+	audio/mp4 m4a;
+	audio/wav wav;
+	audio/flac flac;
+	audio/midi mid midi;
+	application/vnd.apple.mpegurl m3u m3u8;
+
+	video/mp4 mp4 m4v;
+	video/mpeg mpg mpe mpeg;
+	video/ogg ogv;
+
+	font/ttf ttf ttc;
+	font/otf otf otc;
+	font/woff woff;
+	font/woff2 woff2;
+
+	application/x-tar tar;
+	application/x-7z-compressed 7z;
+	application/vnd.rar rar;
+	application/zip zip;
+	application/gzip gz tgz;
+	application/x-bzip2 bz bz2 tbz tbz2;
+	application/x-xz xz txz;
+	application/x-lzip lz;
+	application/x-lzma lzma;
+	application/x-iso9660-image iso;
+	application/vnd.ms-cab-compressed cab msu;
+	application/x-raw-disk-image img;
+	application/x-apple-diskimage dmg;
+	application/x-bcpio bcpio;
+	application/x-cpio cpio;
+	application/x-ustar ustar;
+
+	application/x-redhat-package-manager rpm;
+	application/x-debian-package deb;
+	application/vnd.android.package-archive apk;
+	application/x-xpinstall xpi;
+	application/x-x509-ca-cert der pem crt;
+	application/x-shockwave-flash swf;
+	application/x-msi msi msp;
+	application/x-ms-msm msm;
+
+	application/octet-stream a bak bin dll exe ko lib o obj so;
+
+	application/x-perl pl pm;
+	application/json json map;
+	text/javascript js mjs;
+	application/x-python-code pyc pyo;
+	application/x-sh ash bash fish ksh sh zsh;
+	text/x-asm asm s;
+	text/x-c c;
+	text/x-c++src cc cpp cxx c++;
+	text/x-c++hdr h hh hpp hxx h++;
+	text/x-objcsrc m;
+	text/x-csharp cs;
+	text/x-fortran f f77 f90 f95 f03;
+	text/x-go go;
+	text/x-java-source java;
+	text/markdown md markdown;
+	text/x-python py;
+	text/x-scala scala;
+	application/sql sql;
+	application/vnd.sqlite3 sqlite sqlite3 db;
+	text/typescript ts;
+}
