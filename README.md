@@ -10,7 +10,10 @@ Scripts for orchestrating multi-master web servers.
 subfolders of the various website sources, where it can be integrated
 into a build system like Make. `push.sh` takes a two-column CSV file as
 input for its list of sources and their server-side destinations; see
-`etc/publish.csv` for an idea of what that may look like.
+`etc/publish.csv` for an idea of what that may look like. It syncs files
+from the current working directory into paths ultimately relative to the
+server&rsquo;s `/var/lib/nginx/public` directory; conventionally, the
+immediate sufolders of this are for each (sub-)domain hosted.
 
 In practise, `push.sh` always expects to be run from `util/` in the
 source tree with `etc/publish.csv` available as described. It takes a
