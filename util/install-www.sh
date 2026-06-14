@@ -12,6 +12,8 @@ mkdir=/bin/mkdir;
 command -v gmkdir 2>&1 >/dev/null && mkdir=gmkdir;
 find=/usr/bin/find;
 command -v gfind 2>&1 >/dev/null && find=gfind;
+chown=chown;
+command -v gchown 2>&1 >/dev/null && chown=gchown;
 
 zero="$0";
 zero="$(cd $(dirname "$zero")/.. && pwd)";
@@ -44,5 +46,7 @@ for site in $sites; do
 	site="${site##*/}";
 	${ln} -sf "../available/$site";
 done
+
+${chown} -R nginx:nginx /etc/nginx;
 
 CDPATH= cd "$zero" || exit 127;
