@@ -59,6 +59,33 @@ On each server, download a snapshot of this repository and run
 replaced, which can be restored along with removal of the remaining
 installation by running `util/uninstall-www.sh`.
 
+### Private configuration files
+
+Website content itself is kept out of scope from Cmd&amp;Ctrl. While
+usually website configuration files are checked in here for the sake of
+simplicity, convenience and example inasmuch as the project may be
+adapted by others, there are cases where this exposes _metadata_ about
+the content that this toolkit presumes to be private. The main case to
+address is that of _access-controlled content._
+
+Since Cmd&amp;Ctrl has a heavy preference towards &lsquo;static&rsquo;
+website configurations, which only use an nginx `root` directive and
+leave the directory structure and filenames therein up to the site,
+it becomes necessary to facilitate configuration files that can still
+ensure that opaqueness with respect to this architecture. These
+configuration files may be `include`d by public ones herein, and may
+contain lists of `location`s, access to which is guarded by some kind of
+authentication method. Cmd&amp;Ctrl provides an agnostic way of handling
+these: a `privconf.csv` file in the same format as `publish.csv`,
+presumed to be located in a project&rsquo;s `etc/` folder by
+[`push.sh`](/src/push.sh). All source files are written
+directory-relative to the project root, and will be propagated into the
+`/etc/nginx/private` folder without any directory tree shenanigans.
+
+It&rsquo;s vital to be considerate when naming private configuration
+files with respect to the entire deployment, since they all share the
+same folder on all edge servers.
+
 ## TLS/SSL configurations
 
 ### Adding domains to the fray
