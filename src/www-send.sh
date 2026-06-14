@@ -21,4 +21,7 @@ for arg in "$@"; do
 	rsync -aze 'ssh -qi "/var/cache/httpsync/.ssh/httpsync"' \
 		/var/cache/httpsync/public \
 		"httpsync@$arg:/var/cache/httpsync/"
+	rsync -aze 'ssh -qi "/var/cache/httpsync/.ssh/httpsync"' \
+		/var/cache/httpsync/private \
+		"httpsync@$arg:/var/cache/httpsync/"
 done
