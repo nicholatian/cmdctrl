@@ -14,4 +14,14 @@ ${rm} -rf /var/cache/httpsync/public;
 chown -R nginx:nginx /var/lib/nginx/public;
 chmod 750 /var/lib/nginx/public;
 
+${test} -d /var/cache/httpsync/private || {
+	service nginx restart;
+	exit 0;
+};
+
+${cp} -a /var/cache/httpsync/private /etc/nginx/;
+${rm} -rf /var/cache/httpsync/private;
+chown -R nginx:nginx /etc/nginx/private;
+chmod 750 /etc/nginx/private;
+
 service nginx restart;
