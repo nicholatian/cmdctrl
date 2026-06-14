@@ -4,7 +4,7 @@ Scripts for orchestrating multi-master web servers.
 
 ---
 
-## Updating website content
+## Website content
 
 [`push.sh`](/src/push.sh) is meant to be syndicated into the `util/`
 subfolders of the various website sources, where it can be integrated
@@ -28,7 +28,60 @@ have the default public key `~/.ssh/id_rsa.pub` put into the
 `~/.ssh/authorized_keys` file of `httpsync` on the server designated to
 initiate propagation of website files to the rest.
 
-## Let&rsquo;s Encrypt synchronisation
+## Website configuration
+
+nginx is run as the `nginx` user with the configuration directory as
+`/etc/nginx` and the user&rsquo;s `$HOME` as `/var/lib/nginx`. Every
+server should `usermod -s /bin/sh nginx` so `push.sh` can function from
+developer machines.
+
+`push.sh` and all of the site configuration files expect the public HTML
+directories to be contained within `/var/lib/nginx/public/${website}`,
+where `${website}` is a reverse dot notation of a full domain name
+corresponding to a `.conf` file inside `/etc/nginx/available/` for the
+same. For example, the Cmd&amp;Ctrl sources here provide a
+`mt.xion.irc.conf` file for `irc.xion.mt`, which expects its root to be
+`/var/lib/nginx/public/mt.xion.irc`.
+
+To obviate the need for every development machine to sync its public SSH
+key to every public edge server, the technique from
+_Let&rsquo;s Encrypt_ propagation is borrowed; the `httpsync` account
+is used to stage new static files, which are `rsync`ed every 15 minutes
+by a cronjob running the `src/www-send.sh` script. A cronjob on the
+other servers runs `src/www-recv.sh` every 15 minutes to scoop up the
+files from `httpsync`&rsquo;s unprivileged home directory and merge them
+into the live root.
+
+### Synching configuration files
+
+On each server, download a snapshot of this repository and run
+`util/install-www.sh`. This will make backups of any stock files to be
+replaced, which can be restored along with removal of the remaining
+installation by running `util/uninstall-www.sh`.
+
+## TLS/SSL configurations
+
+### Adding domains to the fray
+
+DNS based authentication using the Cloudflare&trade; API is needed since
+the default file-based HTTP authentication will not work with multiple
+A/AAAA records in use. This preference is saved after certificate
+creation in `/etc/letsencrypt` so it is automatically recalled later by
+`certbot renew`.
+
+```sh
+certbot certonly --dns-cloudflare \
+--dns-cloudflare-credentials /etc/letsencrypt/cloudflare.ini \
+--dns-cloudflare-propagation-seconds 30 \
+--preferred-challenges dns-01 \
+-d @DOMAIN@
+# and so on...
+```
+
+After this, run `tls-send.sh` so the fresh certificates get picked up by
+the other servers in a timely fashion.
+
+### Synching certificates
 
 Synching _Let&rsquo;s Encrypt_ configuration data is needed so that all
 servers can handle HTTPS harmoniously. It is assumed that this process
@@ -69,54 +122,3 @@ practise).
 `tls-send.sh` should be run **monthly** on the server originating the
 TLS certificates. `tls-recv.sh` should be run **daily** on all the
 receiving servers that the originating server sent to via `tls-send.sh`.
-
-### Adding domains to the fray
-
-DNS based authentication using the Cloudflare&trade; API is needed since
-the default file-based HTTP authentication will not work with multiple
-A/AAAA records in use. This preference is saved after certificate
-creation in `/etc/letsencrypt` so it is automatically recalled later by
-`certbot renew`.
-
-```sh
-certbot certonly --dns-cloudflare \
---dns-cloudflare-credentials /etc/letsencrypt/cloudflare.ini \
---dns-cloudflare-propagation-seconds 30 \
---preferred-challenges dns-01 \
--d @DOMAIN@
-# and so on...
-```
-
-After this, run `tls-send.sh` so the fresh certificates get picked up by
-the other servers in a timely fashion.
-
-## Website configuration
-
-nginx is run as the `nginx` user with the configuration directory as
-`/etc/nginx` and the user&rsquo;s `$HOME` as `/var/lib/nginx`. Every
-server should `usermod -s /bin/sh nginx` so `push.sh` can function from
-developer machines.
-
-`push.sh` and all of the site configuration files expect the public HTML
-directories to be contained within `/var/lib/nginx/public/${website}`,
-where `${website}` is a reverse dot notation of a full domain name
-corresponding to a `.conf` file inside `/etc/nginx/available/` for the
-same. For example, the Cmd&amp;Ctrl sources here provide a
-`mt.xion.irc.conf` file for `irc.xion.mt`, which expects its root to be
-`/var/lib/nginx/public/mt.xion.irc`.
-
-To obviate the need for every development machine to sync its public SSH
-key to every public edge server, the technique from
-_Let&rsquo;s Encrypt_ propagation is borrowed; the `httpsync` account
-is used to stage new static files, which are `rsync`ed every 15 minutes
-by a cronjob running the `src/www-send.sh` script. A cronjob on the
-other servers runs `src/www-recv.sh` every 15 minutes to scoop up the
-files from `httpsync`&rsquo;s unprivileged home directory and merge them
-into the live root.
-
-### Configuration files
-
-On each server, download a snapshot of this repository and run
-`util/install-www.sh`. This will make backups of any stock files to be
-replaced, which can be restored along with removal of the remaining
-installation by running `util/uninstall-www.sh`.
