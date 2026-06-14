@@ -24,3 +24,15 @@ for _record in $(cat etc/publish.csv); do
 		"httpsync@$1:/var/cache/httpsync/public/$dst";
 	${echod};
 done
+
+test -f etc/privconf.csv || exit 0;
+
+for _record in $(cal etc/privconf.csv); do
+	IFS=',' read -r src dst <<< "${_record}";
+	${echop} "Uploading $src to $dst... ";
+	ssh -q "httpsync@$1" -- \
+		mkdir -p /var/cache/httpsync/private;
+	rsync -ze 'ssh -q' -lptgoD "$src" \
+		"httpsync@$1:/var/cache/httpsync/private/$dst";
+	${echod};
+done
