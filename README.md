@@ -30,7 +30,7 @@ initiate propagation of website files to the rest.
 
 ## Let&rsquo;s Encrypt synchronisation
 
-Synching _Lets&rsquo;s Encrypt_ configuration data is needed so that all
+Synching _Let&rsquo;s Encrypt_ configuration data is needed so that all
 servers can handle HTTPS harmoniously. It is assumed that this process
 is started from one server where the working certificates and
 configuration settings reside.
