@@ -8,6 +8,20 @@ echod="${echo} done.";
 rm=rm;
 command -v grm 2>&1 >/dev/null && rm=grm;
 
+if test "$1" = '-h' || test "$1" = '--help'; then
+	${echo} 'Usage:-';
+	${echo} '    push.sh <dstserver>';
+	${echo} '';
+	${echo} '    <dstserver>  Hostname or IP of destination server';
+	${echo} '                 to push to. Passed to ssh and rsync.';
+	${echo} 'Relevant environment variables:-';
+	${echo} '    PUBCSV  HTML file publishing list in CSV format.';
+	${echo} '            Defaults to etc/publish.csv from $PWD.';
+	${echo} '    PRVCSV  Private configuration file list in CSV';
+	${echo} '            format. Defaults to etc/privconf.csv from';
+	${echo} '            $PWD.';
+fi
+
 test "$1" = '' && {
 	${echo} '$1 must be the hostname of the destination server to';
 	${echo} 'push to. Exiting...';
