@@ -22,13 +22,24 @@ if test "$1" = '-h' || test "$1" = '--help'; then
 	${echo} '            $PWD.';
 fi
 
+_pubcsv=etc/publish.csv;
+_prvcsv=etc/privconf.csv;
+
+test "$PUBCSV" != '' && _pubcsv="$PUBCSV";
+test "$PRVCSV" != '' && _prvcsv="$PRVCSV";
+
 test "$1" = '' && {
 	${echo} '$1 must be the hostname of the destination server to';
 	${echo} 'push to. Exiting...';
 	exit 127;
 };
 
-for _record in $(cat etc/publish.csv); do
+test -f "$_pubcsv" || {
+	${echo} "$_pubcsv not found. Exiting...";
+	exit 127;
+};
+
+for _record in $(cat "$_pubcsv"); do
 	IFS=',' read -r src dst <<< "${_record}";
 	${echop} "Uploading $src to $dst... ";
 	dstdir="$(dirname "$dst")";
@@ -39,9 +50,13 @@ for _record in $(cat etc/publish.csv); do
 	${echod};
 done
 
-test -f etc/privconf.csv || exit 0;
+test -f "$_prvcsv" || {
+	${echo} 'No private configuration file found.';
+	${echo} 'Exiting now...';
+	exit 0;
+};
 
-for _record in $(cal etc/privconf.csv); do
+for _record in $(cal "$_prvcsv"); do
 	IFS=',' read -r src dst <<< "${_record}";
 	${echop} "Uploading $src to $dst... ";
 	ssh -q "httpsync@$1" -- \
