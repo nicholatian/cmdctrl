@@ -56,7 +56,7 @@ test -f "$_prvcsv" || {
 	exit 0;
 };
 
-for _record in $(cal "$_prvcsv"); do
+for _record in $(cat "$_prvcsv"); do
 	IFS=',' read -r src dst <<< "${_record}";
 	${echop} "Uploading $src to $dst... ";
 	ssh -q "httpsync@$1" -- \
