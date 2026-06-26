@@ -25,6 +25,7 @@ ${cp} -a src/nginx.conf /etc/nginx/nginx.conf;
 ${test} -f /etc/nginx/mime.types && \
 	${test} ! -f /etc/nginx/mime.types.bak && \
 	${mv} /etc/nginx/mime.types /etc/nginx/mime.types.bak;
+${cp} -a src/errorpages /var/lib/nginx/;
 ${cp} -a src/mime.types /etc/nginx/mime.types;
 ${cp} -a src/sslredir.conf /etc/nginx/ssl-redirect.conf;
 ${cp} -a src/sitebits.conf /etc/nginx/sitebits.conf;
