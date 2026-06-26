@@ -28,6 +28,24 @@ content="width=device-width,initial-scale=1,user-scalable=1" />
 	src: url('https://cdn.tohoku.ac/firasan7.woff');
 }
 
+@font-face
+{
+	font-family: 'Fira Mono';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('https://cdn.tohoku.ac/firamonb.woff');
+}
+
+@font-face
+{
+	font-family: 'Roboto Slab';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('https://cdn.tohoku.ac/robotosl.woff');
+}
+
 *,
 *::before,
 *::after
@@ -90,11 +108,45 @@ div.footer
 
 div.footer > p.copyright
 {
-	font-weight: 700;
+	font-family:
+		'Roboto Slab',
+		'Palatino Linotype',
+		'Palatino',
+		'Palladio',
+		'URW Palladio L',
+		'Book Antiqua',
+		'Baskerville',
+		'Bookman Old Style',
+		'Bitstream Charter',
+		'Nimbus Roman No9 L',
+		'Garamond',
+		'Apple Garamond',
+		'ITC Garamond Narrow',
+		'New Century Schoolbook',
+		'Century Schoolbook',
+		'Century Schoolbook L',
+		'Georgia',
+		serif;
+	font-weight: 500;
 }
 
 p.status-code
 {
+	font-family:
+		'Fira Mono',
+		'Consolas',
+		'Andale Mono WT',
+		'Andale Mono',
+		'Lucida Console',
+		'Lucida Sans Typewriter',
+		'DejaVu Sans Mono',
+		'Bitstream Vera Sans Mono',
+		'Liberation Mono',
+		'Nimbus Mono L',
+		'Monaco',
+		'Courier New',
+		'Courier',
+		monospace;
 	font-size: 120px;
 	font-weight: 700;
 	margin: 30px;
